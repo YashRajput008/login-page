@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import "./HookForm.css";
 
 const HookForm = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, formState:{errors}, handleSubmit } = useForm();
 
   const loginHandler = (data) => {
     console.log(data);
@@ -14,16 +14,20 @@ const HookForm = () => {
         <div className="form-item">
           <label htmlFor="emailID">Email:</label>
           <input
-            {...register("emailID")}
+            {...register("emailID", {required:true, maxLength:10})}
+            id="emailID"
             placeholder="Enter your Email"
           />
+          {errors.emailID && <p style={{color:"red"}}>Email is Required</p>}
         </div>
         <div className="form-item">
           <label htmlFor="password">Password:</label>
           <input
-            {...register("password")}
+            {...register("password", {required:true, maxLength:10})}
+            id="password"
             placeholder="Enter your Password"
           />
+          {errors.password && <p style={{color:"red"}}>Password is Required</p>}
         </div>
         <button className="form-btn">Submit</button>
       </form>
