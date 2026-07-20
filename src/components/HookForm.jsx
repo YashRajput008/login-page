@@ -1,32 +1,27 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import "./HookForm.css";
 
 const HookForm = () => {
-  
+  const { register, handleSubmit } = useForm();
 
-  const loginHandler = (event) => {
-    event.preventDefault();
-    console.log("loginHandle");
+  const loginHandler = (data) => {
+    console.log(data);
   };
 
   return (
     <div>
-      <form className="form-container" onSubmit={loginHandler}>
+      <form className="form-container" onSubmit={handleSubmit(loginHandler)}>
         <div className="form-item">
           <label htmlFor="emailID">Email:</label>
           <input
-            id="emailID"
-            name="emailID"
-            type="text"
+            {...register("emailID")}
             placeholder="Enter your Email"
           />
         </div>
         <div className="form-item">
           <label htmlFor="password">Password:</label>
           <input
-            id="password"
-            name="password"
-            type="password"
+            {...register("password")}
             placeholder="Enter your Password"
           />
         </div>
